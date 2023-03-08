@@ -1,0 +1,27 @@
+name: FunMachine
+
+on:
+  workflow_dispatch:
+      inputs:
+        acc:
+          default: '0'
+  push:
+      
+jobs:
+  Parse:
+    runs-on: windows-latest
+    steps:
+    - name: Clone Repo
+      uses: actions/checkout@v3
+    - name: Install web driver
+      run: pip install undetected-chromedriver
+    - name: Install Chrome
+      shell: pwsh
+      run: |
+        $Path = $env:TEMP;
+        $Installer = “chrome_installer.exe”;
+        Invoke-WebRequest “http://dl.google.com/chrome/chrome_installer.exe" -OutFile $Path\$Installer;
+        Start-Process -FilePath $Path\$Installer -Args “/silent /install” -Verb RunAs -Wait;
+        Remove-Item $Path\$Installer
+    - name: Parser
+      run: python script.py ${{inputs.acc}}
