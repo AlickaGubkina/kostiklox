@@ -1,0 +1,26 @@
+name: LinuxFunMachine
+
+on:
+  workflow_dispatch:
+      inputs:
+        acc:
+          default: '0'
+  push:
+      
+jobs:
+  Parse:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone Repo
+      uses: actions/checkout@v3
+    - name: Install web driver
+      run: pip install undetected-chromedriver
+    - name: Install Chrome
+      shell: pwsh
+      run: |
+        sudo apt update
+        sudo apt upgrade
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb
+    - name: Parser
+      run: python script.py ${{inputs.acc}}
