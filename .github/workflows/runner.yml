@@ -20,10 +20,8 @@ jobs:
       run: |
         $Path = $env:TEMP;
         $Installer = “chrome_installer.exe”;
-        Invoke-WebRequest “https://www.google.com/intl/ru/chrome/thank-you.html?standalone=1&statcb=1&installdataindex=empty&defaultbrowser=0#" -OutFile $Path\$Installer;
+        Invoke-WebRequest "http://dl.google.com/chrome/install/375.126/chrome_installer.exe" -OutFile $Path\$Installer;
         Start-Process -FilePath $Path\$Installer -Args “/silent /install” -Verb RunAs -Wait;
         Remove-Item $Path\$Installer
-    - name: Config Proxy
-      run: netsh winhttp set proxy 196.219.202.74:8080
     - name: Parser
       run: python script.py ${{inputs.acc}}
