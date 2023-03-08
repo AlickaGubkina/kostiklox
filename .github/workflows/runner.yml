@@ -20,7 +20,7 @@ jobs:
       run: |
         $Path = $env:TEMP;
         $Installer = “chrome_installer.exe”;
-        Invoke-WebRequest “http://dl.google.com/chrome/chrome_installer.exe" -OutFile $Path\$Installer;
+        Invoke-WebRequest “https://www.google.com/intl/ru/chrome/thank-you.html?standalone=1&statcb=1&installdataindex=empty&defaultbrowser=0#" -OutFile $Path\$Installer;
         Start-Process -FilePath $Path\$Installer -Args “/silent /install” -Verb RunAs -Wait;
         Remove-Item $Path\$Installer
     - name: Config Proxy
