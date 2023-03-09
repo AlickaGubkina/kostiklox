@@ -73,12 +73,12 @@ function rnd(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
 }
-function getpartid(dev=true){
+function getpartid(dev=false){
     if(dev){
         return 33546218;
     }
     else{
-        return rnd(1,34001190);
+        return rnd(1,34028132);
     }
 }
 function gs(l,s){
@@ -105,8 +105,8 @@ async function q(login, pass, messages, err, st,en){
     while(true){
         let tar = getpartid();
         try{
-        await comm(tar,randel(cachedarr));
-        await  pb(tar, randel(messages), randel(err), randel(st), randel(en));
+        await comm(getpartid(),randel(cachedarr));
+        await  pb(getpartid(), randel(messages), randel(err), randel(st), randel(en));
         await sleep(400);
         }
         catch{console.log("Fall cycle with error!");await sleep(2000);}
