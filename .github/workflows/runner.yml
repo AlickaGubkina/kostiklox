@@ -17,6 +17,6 @@ jobs:
       run: pip install undetected-chromedriver
     - name: Update Chrome
       run: |
-        "C:\Program Files (x86)\Google\Update\GoogleUpdate.exe" /ua /installsource scheduler
+        & "C:\Program Files (x86)\Google\Update\GoogleUpdate.exe" /ua /installsource scheduler
     - name: Parser
       run: python script.py ${{inputs.acc}}
